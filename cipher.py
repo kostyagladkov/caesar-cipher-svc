@@ -12,8 +12,9 @@ if choice == "encode":
         key = int(key)
     caesar.encode(text, key)
 elif choice == "decode":
+    text = input("Write what do you want to decode: ")
     key = input("Choose your key to decode (write a number):")
     key = int(key)
-    caesar.decode(key)
+    caesar.decode(text,key)
 else:
     print("You didn\'t pick a correct choice")
