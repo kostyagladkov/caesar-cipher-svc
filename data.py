@@ -2,17 +2,12 @@ import sqlite3
 import caesar
 
 
-def db_setter():
+def db_setter(text, key):
 
 	conn = sqlite3.connect('cipher_database.db')
 
 	c = conn.cursor()
 
-	text = input("Write your text: ")
-	text = str(text)
-
-	key = input("Write your key: ")
-	key = int(key) 
 
 	x1 = caesar.encode(text,key)
 
@@ -28,14 +23,13 @@ def db_setter():
 	conn.close()
 
 
-def db_getter():
+def db_getter(search):
 
 	conn = sqlite3.connect('cipher_database.db')
 
 	c = conn.cursor()
 
-	find_e = input("Write what do you want to find: ")
-	find_e = str(find_e)
+	find_e = search
 
 	c.execute("SELECT * FROM cipher WHERE ENCODE = '{}'".format(find_e))
 	print(c.fetchone())
@@ -52,7 +46,3 @@ def db_getter():
 	#conn.commit()
 
 	conn.close()
-
-
-db_setter()
-db_getter()
