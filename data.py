@@ -2,18 +2,13 @@ import sqlite3
 import caesar
 
 
-def db_setter(text, key):
+
+def db_connect():
 
 	conn = sqlite3.connect('cipher_database.db')
 
 	c = conn.cursor()
 
-
-	x1 = caesar.encode(text,key)
-
-	x2 = caesar.decode(x1,key)
-
-	#Creating a table, if table is already created just comment or delete this line
 	#c.execute("""CREATE TABLE cipher(encode text, decode text)""")
 
 	c.execute("INSERT INTO cipher VALUES (:encode, :decode)", {'encode': x1, 'decode': x2} )
@@ -21,6 +16,18 @@ def db_setter(text, key):
 	conn.commit()
 	
 	conn.close()
+
+
+def db_setter(text, key):
+
+	global x1
+
+	global x2
+
+	x1 = caesar.encode(text,key)
+
+	x2 = caesar.decode(x1,key)
+
 
 
 def db_getter(search):
@@ -42,7 +49,10 @@ def db_getter(search):
 	#rows = c.fetchall()
 	#for row in rows:
 	#	print(row)
-
 	#conn.commit()
 
 	conn.close()
+
+db_setter()
+db_connect()
+db_getter()
